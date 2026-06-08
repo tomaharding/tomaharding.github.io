@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tom Harding — Web & Security</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #c9a84c;
+      --bg: #07080a;
+      --bg2: #0d0f12;
+      --bg3: #12151a;
+      --border: rgba(255,255,255,0.07);
+      --border-gold: rgba(201,168,76,0.25);
+      --text: #e8eaf0;
+      --text-muted: #6b7280;
+      --text-dim: #9ca3af;
+      --green: #4ade80;
+      --red: #f87171;
+      --blue: #60a5fa;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1000;
+      opacity: 0.4;
+    }
+
+    .aurora {
+      position: fixed;
+      top: -40%; left: 50%;
+      transform: translateX(-50%);
+      width: 800px; height: 600px;
+      background: radial-gradient(ellipse at 50% 30%, rgba(201,168,76,0.04) 0%, transparent 60%),
+                  radial-gradient(ellipse at 20% 60%, rgba(96,165,250,0.03) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.25rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s, background 0.3s;
+    }
+    nav.scrolled {
+      background: rgba(7,8,10,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom-color: var(--border);
+    }
+    .nav-logo {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.95rem;
+      color: var(--gold);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--text-muted); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    section { position: relative; z-index: 1; }
+    .container { max-width: 1000px; margin: 0 auto; padding: 0 2rem; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 8rem 0 4rem;
+    }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .hero-left { display: flex; flex-direction: column; gap: 2rem; }
+
+    /* photo + intro card */
+    .intro-card {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+    }
+    .photo-placeholder {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--bg3);
+      border: 2px solid var(--border-gold);
+      overflow: hidden;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 0.65rem;
+      font-family: 'IBM Plex Mono', monospace;
+      text-align: center;
+      line-height: 1.4;
+    }
+    .photo-placeholder img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+    .intro-card-text { }
+    .intro-card-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    .intro-card-role {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .intro-card-location {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--gold);
+      margin-top: 0.2rem;
+    }
+
+    .hero-eyebrow {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--gold);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 24px; height: 1px;
+      background: var(--gold);
+    }
+    .hero-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.5rem, 4.5vw, 4rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+    .hero-title .line { display: block; overflow: hidden; }
+    .hero-title .word {
+      display: inline-block;
+      transform: translateY(110%);
+      animation: slideUp 0.7s cubic-bezier(0.16,1,0.3,1) forwards;
+    }
+    .hero-title .word:nth-child(2) { animation-delay: 0.08s; }
+    .hero-title .word:nth-child(3) { animation-delay: 0.16s; }
+    .hero-title em { font-style: normal; color: var(--gold); }
+    @keyframes slideUp { to { transform: translateY(0); } }
+
+    .hero-plain {
+      font-size: 1.1rem;
+      color: var(--text-dim);
+      line-height: 1.8;
+      max-width: 440px;
+    }
+    .hero-plain strong { color: var(--text); font-weight: 500; }
+
+    .hero-contact {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .contact-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .contact-pill:hover { color: var(--gold); }
+    .contact-pill-icon {
+      width: 28px; height: 28px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+    }
+
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+      padding: 0.75rem 1.75rem;
+      background: var(--gold);
+      color: #07080a;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s;
+      font-weight: 600;
+    }
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn-ghost {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+      padding: 0.75rem 1.75rem;
+      background: transparent;
+      color: var(--text-muted);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s, transform 0.15s;
+    }
+    .btn-ghost:hover { border-color: var(--border-gold); color: var(--text); transform: translateY(-1px); }
+
+    /* terminal */
+    .terminal {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.82rem;
+    }
+    .terminal-bar {
+      background: var(--bg3);
+      padding: 0.65rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot-r { background: #ff5f57; }
+    .dot-y { background: #febc2e; }
+    .dot-g { background: #28c840; }
+    .terminal-title {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-left: auto;
+      margin-right: auto;
+      transform: translateX(-18px);
+    }
+    .terminal-body { padding: 1.25rem 1.5rem; line-height: 2; }
+    .t-prompt { color: var(--gold); }
+    .t-cmd { color: var(--text); }
+    .t-out { color: var(--text-muted); padding-left: 1rem; }
+    .t-green { color: var(--green); }
+    .t-red { color: var(--red); }
+    .t-blue { color: var(--blue); }
+    .t-cursor {
+      display: inline-block;
+      width: 8px; height: 14px;
+      background: var(--gold);
+      vertical-align: middle;
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    /* WHO I HELP */
+    #who { padding: 5rem 0; border-top: 1px solid var(--border); }
+    .who-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-top: 2.5rem;
+    }
+    .who-card {
+      background: var(--bg);
+      padding: 1.5rem;
+      transition: background 0.2s;
+    }
+    .who-card:hover { background: var(--bg2); }
+    .who-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+    .who-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+    .who-desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
+
+    /* SECTION COMMON */
+    .section-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--gold);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+      line-height: 1.15;
+    }
+    .section-sub { color: var(--text-dim); max-width: 520px; line-height: 1.8; }
+
+    /* SERVICES */
+    #services { padding: 7rem 0; border-top: 1px solid var(--border); }
+    .services-head { margin-bottom: 3.5rem; }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+    .service-card {
+      background: var(--bg);
+      padding: 2rem;
+      transition: background 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s cubic-bezier(0.16,1,0.3,1);
+    }
+    .service-card:hover { background: var(--bg2); }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-bottom: 1.25rem;
+      letter-spacing: 0.1em;
+    }
+    .service-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .service-plain {
+      font-size: 0.88rem;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+      font-style: italic;
+    }
+    .service-desc { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; }
+    .service-price {
+      margin-top: 1.25rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      border-top: 1px solid var(--border);
+      padding-top: 1rem;
+    }
+    .service-price strong { color: var(--gold); }
+
+    /* WORK */
+    #work { padding: 7rem 0; border-top: 1px solid var(--border); }
+    .work-head { margin-bottom: 3.5rem; }
+    .case-study {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 3rem;
+      padding: 2.5rem 0;
+      border-bottom: 1px solid var(--border);
+      align-items: start;
+    }
+    .case-study:first-of-type { border-top: 1px solid var(--border); }
+    .case-client {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .case-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+    .case-date {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+    .case-desc { color: var(--text-dim); line-height: 1.8; margin-bottom: 1.5rem; }
+    .findings {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+    .finding {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-left: 2px solid;
+      padding: 0.75rem 1rem;
+    }
+    .finding.medium { border-left-color: #facc15; }
+    .finding.low { border-left-color: #4ade80; }
+    .finding.info { border-left-color: #60a5fa; }
+    .finding-sev {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.25rem;
+    }
+    .finding.medium .finding-sev { color: #facc15; }
+    .finding.low .finding-sev { color: #4ade80; }
+    .finding.info .finding-sev { color: #60a5fa; }
+    .finding-name { font-size: 0.85rem; color: var(--text); line-height: 1.4; }
+    .case-outcome {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+      padding-top: 1rem;
+      line-height: 1.8;
+    }
+    .case-outcome strong { color: var(--gold); font-weight: 500; }
+
+    /* SKILLS */
+    #skills { padding: 7rem 0; border-top: 1px solid var(--border); }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    .skill-group-name {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--gold);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .skill-list { list-style: none; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .skill-list li {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      padding: 0.35rem 0.75rem;
+      border: 1px solid var(--border);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .skill-list li:hover { border-color: var(--border-gold); color: var(--text); }
+
+    /* CONTACT */
+    #contact { padding: 7rem 0; border-top: 1px solid var(--border); }
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .contact-methods { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; }
+    .contact-method {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      text-decoration: none;
+      transition: border-color 0.2s;
+    }
+    .contact-method:hover { border-color: var(--border-gold); }
+    .contact-method-icon {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--gold);
+      width: 36px;
+      text-align: center;
+    }
+    .contact-method-label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-family: 'IBM Plex Mono', monospace;
+      margin-bottom: 0.1rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .contact-method-value {
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .form-input, .form-textarea {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      padding: 0.75rem 1rem;
+      outline: none;
+      transition: border-color 0.2s;
+      resize: none;
+    }
+    .form-input:focus, .form-textarea:focus { border-color: var(--border-gold); }
+    .form-textarea { min-height: 120px; }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-copy {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-d1 { transition-delay: 0.1s; }
+    .reveal-d2 { transition-delay: 0.2s; }
+    .reveal-d3 { transition-delay: 0.3s; }
+
+    @media (max-width: 768px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .who-grid { grid-template-columns: repeat(2, 1fr); }
+      .services-grid { grid-template-columns: 1fr; }
+      .case-study { grid-template-columns: 1fr; gap: 1.5rem; }
+      .findings { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .contact-inner { grid-template-columns: 1fr; }
+      nav { padding: 1rem; }
+      .nav-links { display: none; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="aurora"></div>
+
+  <nav id="nav">
+    <a href="#" class="nav-logo"><span>[</span>tom@bromsgrove<span> ~]$</span></a>
+    <ul class="nav-links">
+      <li><a href="#who">Who I Help</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <div class="hero-left">
+
+          <div class="intro-card">
+            <div class="photo-placeholder">
+              <!-- Replace src with your photo path e.g. src="photo.jpg" -->
+              <img src="photo.jpeg" alt="Tom Harding" onerror="this.parentElement.innerHTML='your<br>photo'"/>
+            </div>
+            <div class="intro-card-text">
+              <p class="intro-card-name">Tom Harding</p>
+              <p class="intro-card-role">Web Developer & Security Consultant</p>
+              <p class="intro-card-location">📍 Bromsgrove, Worcestershire</p>
+            </div>
+          </div>
+
+          <div>
+            <p class="hero-eyebrow">Available for new clients</p>
+            <h1 class="hero-title">
+              <span class="line"><span class="word">Websites</span></span>
+              <span class="line"><span class="word">&amp; <em>Security</em></span></span>
+            </h1>
+          </div>
+
+          <p class="hero-plain">
+            I build <strong>professional websites</strong> for local businesses and make sure they're <strong>safe from hackers</strong> — in plain English, no jargon.
+          </p>
+
+          <div class="hero-contact">
+            <a href="mailto:taharding@protonmail.com" class="contact-pill">
+              <span class="contact-pill-icon">✉</span>
+              taharding@protonmail.com
+            </a>
+            <a href="#contact" class="contact-pill">
+              <span class="contact-pill-icon">💬</span>
+              Free initial consultation
+            </a>
+          </div>
+
+          <div class="hero-actions">
+            <a href="#work" class="btn-primary">See My Work</a>
+            <a href="#contact" class="btn-ghost">Get a Free Quote</a>
+          </div>
+        </div>
+
+        <div class="terminal">
+          <div class="terminal-bar">
+            <div class="dot dot-r"></div>
+            <div class="dot dot-y"></div>
+            <div class="dot dot-g"></div>
+            <span class="terminal-title">pentest — zsh</span>
+          </div>
+          <div class="terminal-body">
+            <div><span class="t-prompt">→</span> <span class="t-cmd">nmap -sV target.shop</span></div>
+            <div class="t-out">PORT    STATE  SERVICE</div>
+            <div class="t-out"><span class="t-green">80/tcp  open   http</span></div>
+            <div class="t-out"><span class="t-green">443/tcp open   https</span></div>
+            <div style="margin-top:0.5rem"><span class="t-prompt">→</span> <span class="t-cmd">gobuster dir -u https://target.shop</span></div>
+            <div class="t-out"><span class="t-green">/.well-known</span>  (200)</div>
+            <div class="t-out"><span style="color:var(--gold)">/api/products</span> (200)</div>
+            <div class="t-out"><span style="color:var(--gold)">/api/vouches</span>  (200)</div>
+            <div style="margin-top:0.5rem"><span class="t-prompt">→</span> <span class="t-cmd">curl /api/vouches</span></div>
+            <div class="t-out"><span class="t-red">[!] customer data exposed — no auth required</span></div>
+            <div style="margin-top:0.5rem"><span class="t-prompt">→</span> <span class="t-cursor"></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="who">
+    <div class="container">
+      <div class="reveal">
+        <p class="section-label">Who I help</p>
+        <h2 class="section-title">Local businesses, global reach</h2>
+        <p class="section-sub">If you're missing customers because you're not online — or worried your website isn't secure — I can help.</p>
+      </div>
+      <div class="who-grid reveal reveal-d1">
+        <div class="who-card">
+          <div class="who-icon">🔧</div>
+          <p class="who-name">Tradespeople</p>
+          <p class="who-desc">Plumbers, electricians, builders — get found on Google before your competitors.</p>
+        </div>
+        <div class="who-card">
+          <div class="who-icon">🍽️</div>
+          <p class="who-name">Restaurants & Cafés</p>
+          <p class="who-desc">Menus, bookings, and opening hours — all in one place your customers can find.</p>
+        </div>
+        <div class="who-card">
+          <div class="who-icon">💇</div>
+          <p class="who-name">Salons & Beauty</p>
+          <p class="who-desc">Showcase your work and let clients book online, 24/7.</p>
+        </div>
+        <div class="who-card">
+          <div class="who-icon">🛍️</div>
+          <p class="who-name">Independent Shops</p>
+          <p class="who-desc">Sell beyond your high street. Reach customers you'd never meet in person.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="container">
+      <div class="services-head reveal">
+        <p class="section-label">What I offer</p>
+        <h2 class="section-title">Services</h2>
+        <p class="section-sub">Straightforward pricing, no hidden costs, no confusing tech speak.</p>
+      </div>
+      <div class="services-grid reveal reveal-d1">
+        <div class="service-card">
+          <p class="service-num">01</p>
+          <h3 class="service-name">Website Design & Build</h3>
+          <p class="service-plain">A website that works for your business</p>
+          <p class="service-desc">Custom, mobile-friendly websites built from scratch. Fast, clean, and easy for your customers to use — no templates, no page builders.</p>
+          <p class="service-price">From <strong>£300</strong> — live within 2 weeks</p>
+        </div>
+        <div class="service-card">
+          <p class="service-num">02</p>
+          <h3 class="service-name">Security Audit</h3>
+          <p class="service-plain">Find problems before hackers do</p>
+          <p class="service-desc">I check your website for vulnerabilities and give you a plain-English report of what needs fixing and why — no technical background needed to understand it.</p>
+          <p class="service-price">From <strong>£100</strong> — report within 3 days</p>
+        </div>
+        <div class="service-card">
+          <p class="service-num">03</p>
+          <h3 class="service-name">Ongoing Care</h3>
+          <p class="service-plain">Keep your site safe and up to date</p>
+          <p class="service-desc">Monthly security checks, updates, and fixes. You focus on running your business — I'll make sure your website keeps running too.</p>
+          <p class="service-price">From <strong>£40/month</strong> — cancel anytime</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="container">
+      <div class="work-head reveal">
+        <p class="section-label">Case studies</p>
+        <h2 class="section-title">Work</h2>
+        <p class="section-sub">Real projects, real findings, real fixes.</p>
+      </div>
+
+      <div class="case-study reveal reveal-d1">
+        <div class="case-meta">
+          <p class="case-client">ShamiraHub</p>
+          <h3 class="case-title">Security Audit & Fixes</h3>
+          <p class="case-date">June 2026</p>
+        </div>
+        <div class="case-body">
+          <p class="case-desc">Full security audit of a digital goods storefront. Found 6 issues — including a bug stopping iPhone customers from checking out — then fixed everything and delivered a written report.</p>
+          <div class="findings">
+            <div class="finding medium">
+              <p class="finding-sev">Medium</p>
+              <p class="finding-name">iPhone & Safari users couldn't complete checkout</p>
+            </div>
+            <div class="finding medium">
+              <p class="finding-sev">Medium</p>
+              <p class="finding-name">Internal development URL exposed publicly in code</p>
+            </div>
+            <div class="finding low">
+              <p class="finding-sev">Low</p>
+              <p class="finding-name">API endpoints accessible without authentication</p>
+            </div>
+            <div class="finding low">
+              <p class="finding-sev">Low</p>
+              <p class="finding-name">No rate limiting — site vulnerable to scraping</p>
+            </div>
+            <div class="finding low">
+              <p class="finding-sev">Low</p>
+              <p class="finding-name">Domain flagged as suspicious by 4 security vendors</p>
+            </div>
+            <div class="finding info">
+              <p class="finding-sev">Info</p>
+              <p class="finding-name">robots.txt misconfigured — search engine directives ignored</p>
+            </div>
+          </div>
+          <p class="case-outcome">
+            <strong>Outcome:</strong> All issues fixed. iPhone checkout restored, security hardening deployed via Cloudflare, false positive removal requests submitted to 5 vendors. Full written report delivered.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="container">
+      <div class="reveal">
+        <p class="section-label">Tooling</p>
+        <h2 class="section-title">Skills</h2>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-group reveal reveal-d1">
+          <p class="skill-group-name">Frontend</p>
+          <ul class="skill-list">
+            <li>HTML5</li><li>CSS3</li><li>JavaScript</li><li>Responsive Design</li><li>Animations</li><li>Web Performance</li>
+          </ul>
+        </div>
+        <div class="skill-group reveal reveal-d2">
+          <p class="skill-group-name">Security</p>
+          <ul class="skill-list">
+            <li>nmap</li><li>gobuster</li><li>curl</li><li>SecLists</li><li>OWASP Top 10</li><li>Burp Suite</li>
+          </ul>
+        </div>
+        <div class="skill-group reveal reveal-d1">
+          <p class="skill-group-name">Infrastructure</p>
+          <ul class="skill-list">
+            <li>Cloudflare</li><li>DNS</li><li>TLS/SSL</li><li>WAF Rules</li><li>Rate Limiting</li><li>Arch Linux</li>
+          </ul>
+        </div>
+        <div class="skill-group reveal reveal-d2">
+          <p class="skill-group-name">Tools</p>
+          <ul class="skill-list">
+            <li>Git</li><li>VS Code</li><li>dig/nslookup</li><li>openssl</li><li>proxychains</li><li>Tor</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <div class="contact-inner">
+        <div class="reveal">
+          <p class="section-label">Get in touch</p>
+          <h2 class="section-title">Let's Talk</h2>
+          <p class="section-sub">Not sure what you need? Just drop me a message — I'll give you an honest answer, no sales pitch.</p>
+          <div class="contact-methods">
+            <a href="mailto:taharding@protonmail.com" class="contact-method">
+              <span class="contact-method-icon">✉</span>
+              <div>
+                <p class="contact-method-label">Email</p>
+                <p class="contact-method-value">taharding@protonmail.com</p>
+              </div>
+            </a>
+            <div class="contact-method">
+              <span class="contact-method-icon">📍</span>
+              <div>
+                <p class="contact-method-label">Location</p>
+                <p class="contact-method-value">Bromsgrove, Worcestershire</p>
+              </div>
+            </div>
+            <div class="contact-method">
+              <span class="contact-method-icon">🕐</span>
+              <div>
+                <p class="contact-method-label">Response time</p>
+                <p class="contact-method-value">Within 24 hours</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="contact-form reveal reveal-d2">
+          <div class="form-group">
+            <label class="form-label">Your name</label>
+            <input type="text" class="form-input" placeholder="John Smith"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email address</label>
+            <input type="email" class="form-input" placeholder="john@yourbusiness.com"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">What do you need?</label>
+            <textarea class="form-textarea" placeholder="Tell me a bit about your business and what you're looking for..."></textarea>
+          </div>
+          <button class="btn-primary" style="align-self:flex-start;">Send Message</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p class="footer-copy">© 2026 Tom Harding — Bromsgrove</p>
+    <div class="footer-links">
+      <a href="#who">Who I Help</a>
+      <a href="#services">Services</a>
+      <a href="#work">Work</a>
+      <a href="mailto:taharding@protonmail.com">Email</a>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    });
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
