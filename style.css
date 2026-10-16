@@ -469,3 +469,7 @@
       opacity: 1;
       transform: translateY(0);
     }
+    .btn-full {
+      width: 100%;
+      justify-content: center;
+    }    
