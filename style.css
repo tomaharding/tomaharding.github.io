@@ -476,3 +476,13 @@
     .hidden {
       display: none !important;
     }
+    /* ── THANKS / STATUS PAGES ── */
+    .status-page {
+      min-height: calc(100vh - 90px);
+      display: flex; align-items: center;
+      padding-top: 100px;
+    }
+    .status-inner { max-width: 560px; margin: 0 auto; width: 100%; }
+    .status-inner .terminal { margin: 0 0 2rem; }
+    .status-inner .terminal-body { min-height: 0; }
+    a.nav-logo { text-decoration: none; }

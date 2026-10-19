@@ -1,16 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
   <title>Page not found — Tom Harding</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-  <main>
-    <h1>404 — page not found</h1>
-    <p>That page doesn't exist. Let's get you back on track.</p>
-    <a href="/">Back to homepage</a>
-  </main>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo"><span>~/</span>tom-harding</a>
+  <ul class="nav-links">
+    <li><a href="/#who">Who I help</a></li>
+    <li><a href="/#services">Services</a></li>
+    <li><a href="/#work">Work</a></li>
+    <li><a href="/#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- 404 -->
+<section class="status-page">
+  <div class="status-inner">
+    <p class="hero-eyebrow">Error 404</p>
+    <h1>This page <em>doesn't exist</em></h1>
+    <p class="hero-sub">The link might be broken, or the page may have moved. Everything you need is on the homepage.</p>
+
+    <div class="terminal" aria-hidden="true">
+      <div class="terminal-bar">
+        <span class="dot dot-red"></span>
+        <span class="dot dot-amber"></span>
+        <span class="dot dot-green"></span>
+        <span class="terminal-title">website-check.sh</span>
+      </div>
+      <div class="terminal-body">
+        <div class="t-line"><span class="t-prompt">$</span><span class="t-cmd">fetch requested-page</span></div>
+        <div class="t-line"><span class="t-warn">✗</span><span class="t-cmd">status</span><span class="t-val">404 Not Found</span></div>
+        <div class="t-line"><span class="t-comment"># suggestion: head back home</span></div>
+        <div class="t-line"><span class="t-prompt">$</span><span class="t-cmd">cd ~/tom-harding</span></div>
+        <div class="t-line"><span class="t-prompt">$</span><span class="cursor"></span></div>
+      </div>
+    </div>
+
+    <div class="hero-actions">
+      <a href="/" class="btn btn-primary">Back to homepage</a>
+      <a href="/#contact" class="btn btn-ghost">Get in touch</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-mono">© 2026 Tom Harding — Bromsgrove</span>
+  <div class="footer-links">
+    <a href="/#who">Who I help</a>
+    <a href="/#services">Services</a>
+    <a href="/#work">Work</a>
+    <a href="/#contact">Contact</a>
+  </div>
+</footer>
+
 </body>
 </html>
