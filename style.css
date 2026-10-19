@@ -498,3 +498,42 @@
     .legal-actions { margin-top: 3rem; }
     .form-note { font-size: 0.78rem; color: var(--muted); margin-top: 0.75rem; text-align: center; }
     .form-note a { color: var(--green); }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .about-photo {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      display: block;
+    }
+    .about-text > p:not(.section-label) { color: var(--muted); margin-bottom: 1rem; }
+    .about-facts {
+      list-style: none;
+      margin-top: 1.75rem;
+      border-top: 1px solid var(--border);
+      padding-top: 1.25rem;
+      display: flex; flex-direction: column; gap: 0.6rem;
+    }
+    .about-facts li { font-size: 0.9rem; display: flex; gap: 1rem; }
+    .about-facts span {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--green);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      min-width: 90px;
+      padding-top: 0.15rem;
+    }
+    .about-facts a { color: var(--text); text-decoration: underline; text-decoration-color: var(--green); text-underline-offset: 3px; }
+    .about-facts a:hover { color: var(--green); }
+    @media (max-width: 720px) {
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .about-photo { max-width: 260px; }
+    }
