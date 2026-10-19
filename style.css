@@ -485,4 +485,4 @@
     .status-inner { max-width: 560px; margin: 0 auto; width: 100%; }
     .status-inner .terminal { margin: 0 0 2rem; }
     .status-inner .terminal-body { min-height: 0; }
-    a.nav-logo { text-decoration: none; }
+    .nav-logo { text-decoration: none; }
