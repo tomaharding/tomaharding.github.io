@@ -473,3 +473,6 @@
       width: 100%;
       justify-content: center;
     }    
+    .hidden {
+      display: none !important;
+    }
