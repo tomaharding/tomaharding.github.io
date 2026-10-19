@@ -91,4 +91,5 @@ const observer = new IntersectionObserver((entries) => {
       }
     });
   }, { threshold: 0.4 });
-  termObserver.observe(terminalEl);
+  // Only pages with the hero terminal (the homepage) run it
+  if (terminalEl) termObserver.observe(terminalEl);

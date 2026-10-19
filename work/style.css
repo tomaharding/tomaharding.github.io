@@ -1,0 +1,47 @@
+/* ── WORK PAGE ── */
+.work-intro { padding-top: calc(60px + clamp(3rem, 8vw, 5rem)); padding-bottom: 0; }
+.work-intro h1 { margin-bottom: 0.75rem; }
+.work-intro .section-intro { margin-bottom: 0; }
+.work-section { padding-top: clamp(3rem, 7vw, 4.5rem); }
+
+.demo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 1.5rem;
+}
+.demo-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  text-decoration: none; color: var(--text);
+  transition: border-color 0.2s, transform 0.2s;
+}
+.demo-card:hover { border-color: var(--green); transform: translateY(-2px); }
+.demo-card img, .demo-placeholder { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
+.demo-placeholder {
+  display: flex; align-items: center; justify-content: center;
+  background: var(--surface2);
+  border-bottom: 1px dashed var(--border);
+  font-family: var(--mono); font-size: 0.78rem; color: var(--muted);
+  text-transform: uppercase; letter-spacing: 0.1em;
+}
+.demo-soon { border-style: dashed; }
+.demo-body { padding: 1.25rem 1.5rem 1.5rem; display: flex; flex-direction: column; flex: 1; }
+.demo-meta { font-family: var(--mono); font-size: 0.75rem; color: var(--muted); margin-bottom: 0.5rem; }
+.demo-price { color: var(--green); }
+.demo-body h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.4rem; }
+.demo-body p:not(.demo-meta) { font-size: 0.86rem; color: var(--muted); }
+.demo-link { margin-top: auto; padding-top: 1rem; font-family: var(--mono); font-size: 0.8rem; color: var(--green); }
+
+.work-cta { border-top: 1px solid var(--border); background: var(--surface); }
+.work-cta-inner { max-width: 600px; margin: 0 auto; text-align: center; }
+.work-cta-inner p { color: var(--muted); margin-bottom: 1.75rem; }
+
+.nav-links a[aria-current="page"] { color: var(--green); }
+
+/* Homepage link to the work page */
+.see-all { margin-top: 1.75rem; text-align: right; }
+.see-all a { font-family: var(--mono); font-size: 0.85rem; color: var(--green); text-decoration: none; }
+.see-all a:hover { color: #86efac; }

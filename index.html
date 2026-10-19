@@ -27,7 +27,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/style.css?v=10">
 </head>
 <body>
 
@@ -38,10 +38,11 @@
     <li><a href="#who">Who I help</a></li>
     <li><a href="#services">Services</a></li>
     <li><a href="#work">Work</a></li>
-    <li><a href="#contact">Contact</a></li>
     <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
+
 
 <!-- HERO -->
 <section id="hero">
@@ -81,21 +82,25 @@
         <div class="sector-icon">🔧</div>
         <h3>Tradespeople</h3>
         <p>Plumbers, electricians, builders — get found on Google before your competitors do.</p>
+        <a href="/work/plumber/" class="sector-example">See an example site →</a>
       </div>
       <div class="sector-card">
         <div class="sector-icon">🍽️</div>
         <h3>Restaurants &amp; Cafés</h3>
         <p>Menus, opening hours, bookings — all in one place your customers can actually find.</p>
+        <span class="sector-example soon">Example coming soon</span>
       </div>
       <div class="sector-card">
         <div class="sector-icon">💇</div>
         <h3>Salons &amp; Beauty</h3>
         <p>Showcase your work and let clients book online, 24/7 — even while you're with a customer.</p>
+        <span class="sector-example soon">Example coming soon</span>
       </div>
       <div class="sector-card">
         <div class="sector-icon">🛍️</div>
         <h3>Independent Shops</h3>
         <p>Reach customers beyond your high street and sell online without the big-platform fees.</p>
+        <span class="sector-example soon">Example coming soon</span>
       </div>
     </div>
   </div>
@@ -147,6 +152,8 @@
 
   </div>
 </section>
+
+<!-- HOW IT WORKS -->
 <section id="process">
   <div class="container">
     <p class="section-label reveal">// how it works</p>
@@ -176,52 +183,52 @@
     </ol>
   </div>
 </section>
+
 <!-- WORK -->
 <section id="work">
   <div class="container">
     <p class="section-label reveal">// work</p>
-    <h2 class="reveal">Real projects, real results</h2>
-    <p class="section-intro reveal">A recent project — completed with written permission, delivered with a full written report.</p>
+    <h2 class="reveal">Recent work</h2>
+    <p class="section-intro reveal">Websites I've built and security work for real clients.</p>
 
-    <div class="case-study reveal">
-      <div class="case-header">
-        <div>
-          <h3>ShamiraHub — Website Health Check</h3>
-          <p>Digital goods storefront &nbsp;·&nbsp; June 2026 &nbsp;·&nbsp; Paid project</p>
+    <div class="featured-grid stagger">
+      <a href="/work/plumber/" class="demo-card">
+        <img src="/work/plumber/images/hero.jpg" alt="Fernlow Plumbing &amp; Heating concept site" width="1200" height="900" loading="lazy">
+        <div class="demo-body">
+          <p class="demo-meta"><span class="demo-price">Concept site</span> · ~£300</p>
+          <h3>Fernlow Plumbing &amp; Heating</h3>
+          <p>A one-page site for a local plumber, with a service search, photo carousel and quote form.</p>
+          <span class="demo-link">View the site →</span>
         </div>
-        <span class="case-badge">6 issues found &amp; fixed</span>
-      </div>
+      </a>
 
-      <div class="findings">
-        <div class="finding">
-          <span class="sev sev-medium">Medium</span>
-          <span>iPhone and Safari users couldn't complete checkout — affecting a large share of mobile visitors</span>
+      <a href="/work/#client-work" class="demo-card">
+        <div class="security-visual" aria-hidden="true">
+          <span class="sev sev-medium">2 Medium</span>
+          <span class="sev sev-low">3 Low</span>
+          <span class="sev sev-info">1 Info</span>
+          <span class="security-fixed">✓ all fixed</span>
         </div>
-        <div class="finding">
-          <span class="sev sev-medium">Medium</span>
-          <span>Internal development URL left visible in the site's code — accessible to anyone who looked</span>
+        <div class="demo-body">
+          <p class="demo-meta"><span class="demo-price">Security health check</span> · Paid client</p>
+          <h3>ShamiraHub</h3>
+          <p>6 issues found and fixed, including a broken iPhone checkout and unprotected API endpoints.</p>
+          <span class="demo-link">Read the case study →</span>
         </div>
-        <div class="finding">
-          <span class="sev sev-low">Low</span>
-          <span>Several API endpoints accessible without any login — no authentication required</span>
-        </div>
-        <div class="finding">
-          <span class="sev sev-low">Low</span>
-          <span>No rate limiting in place — site was open to automated scraping</span>
-        </div>
-        <div class="finding">
-          <span class="sev sev-low">Low</span>
-          <span>Domain flagged as suspicious by 4 security vendors — causing some visitors to see browser warnings</span>
-        </div>
-        <div class="finding">
-          <span class="sev sev-info">Info</span>
-          <span>robots.txt misconfigured — search engine instructions were being ignored</span>
-        </div>
-      </div>
+      </a>
 
-      <div class="case-outcome">
-        <strong>Outcome:</strong> All six issues fixed. iPhone checkout restored, security hardening deployed via Cloudflare, false positive removal requests submitted to 5 vendors. Full written report delivered to the client.
+      <div class="demo-card demo-soon">
+        <div class="demo-placeholder" aria-hidden="true">coming soon</div>
+        <div class="demo-body">
+          <p class="demo-meta"><span class="demo-price">Concept site</span> · ~£600</p>
+          <h3>Café site</h3>
+          <p>A 3–4 page site with a menu, opening hours, a map and a photo gallery.</p>
+        </div>
       </div>
+    </div>
+
+    <div class="work-more reveal">
+      <a href="/work/" class="btn btn-ghost">See all work</a>
     </div>
   </div>
 </section>
@@ -267,27 +274,7 @@
   </div>
 </section>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="container">
-    <div class="about-grid reveal">
-      <img src="/tom-harding.jpg" alt="Tom Harding" class="about-photo" width="480" height="690" loading="lazy">
-      <div class="about-text">
-        <p class="section-label">// about me</p>
-        <h2>Hi, I'm Tom</h2>
-        <p>I'm a web developer and cybersecurity student based in Bromsgrove. I build websites for local businesses, and because security is what I study, I make sure they're protected from day one, not as an afterthought.</p>
-        <p>Most web designers stop once a site goes live. I also check it the way an attacker would, looking for weak settings, exposed files and outdated software, then fix what I find and explain it in plain English.</p>
-        <p>You'll deal with me directly, from the first chat to launch and beyond.</p>
-        <ul class="about-facts">
-          <li><span>Studying</span>Cybersecurity, University of Worcester</li>
-          <li><span>Based in</span>Bromsgrove, Worcestershire</li>
-          <li><span>This site</span><a href="https://securityheaders.com/?q=tomharding.dev&amp;followRedirects=on" rel="noopener">A+ on securityheaders.com</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
+<!-- FAQ -->
 <section id="faq">
   <div class="container">
     <p class="section-label reveal">// faq</p>
@@ -337,9 +324,26 @@
     </div>
   </div>
 </section>
-<!-- CONTACT -->
+
+<!-- ABOUT + CONTACT -->
 <section id="contact">
   <div class="container">
+    <div id="about" class="about-grid about-in-contact reveal">
+      <img src="/tom-harding.jpg" alt="Tom Harding" class="about-photo" width="480" height="690" loading="lazy">
+      <div class="about-text">
+        <p class="section-label">// about me</p>
+        <h2>Hi, I'm Tom</h2>
+        <p>I'm a web developer and cybersecurity student based in Bromsgrove. I build websites for local businesses, and because security is what I study, I make sure they're protected from day one, not as an afterthought.</p>
+        <p>Most web designers stop once a site goes live. I also check it the way an attacker would, looking for weak settings, exposed files and outdated software, then fix what I find and explain it in plain English.</p>
+        <p>You'll deal with me directly, from the first chat to launch and beyond.</p>
+        <ul class="about-facts">
+          <li><span>Studying</span>Cybersecurity, University of Worcester</li>
+          <li><span>Based in</span>Bromsgrove, Worcestershire</li>
+          <li><span>This site</span><a href="https://securityheaders.com/?q=tomharding.dev&amp;followRedirects=on" rel="noopener">A+ on securityheaders.com</a></li>
+        </ul>
+      </div>
+    </div>
+
     <div class="contact-grid reveal">
       <div class="contact-info">
         <p class="section-label">// get in touch</p>
@@ -406,5 +410,5 @@
     <a href="/privacy">Privacy</a>
   </div>
 </footer>
-<script src="/script.js" defer></script>
+<script src="/script.js?v=2" defer></script>
 </body>
