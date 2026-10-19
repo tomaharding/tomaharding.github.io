@@ -226,19 +226,24 @@
         </div>
       </div>
 
-      <div class="contact-form">
+      <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="a4fd1044-ac58-4b6c-9491-729899461bbe">
+        <input type="hidden" name="subject" value="New enquiry from tomharding.dev">
+        <input type="hidden" name="redirect" value="https://tomharding.dev/thanks.html">
+        <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off">
+
         <div class="form-field">
           <label for="name">your_name</label>
-          <input type="text" id="name" placeholder="Jane Smith" />
+          <input type="text" id="name" name="name" autocomplete="name" placeholder="Jane Smith" required />
         </div>
         <div class="form-field">
           <label for="email">email_address</label>
-          <input type="email" id="email" placeholder="jane@yourbusiness.co.uk" />
+          <input type="email" id="email" name="email" autocomplete="email" placeholder="jane@yourbusiness.co.uk" required />
         </div>
         <div class="form-field">
-          <label for="need">what_do_you_need</label>
-          <select id="need">
-            <option value="" disabled selected>Choose one…</option>
+          <label for="service">what_do_you_need</label>
+          <select id="service" name="service" autocomplete="off" required>
+            <option value="">Choose one…</option>
             <option>A new website</option>
             <option>A website health check</option>
             <option>Ongoing care for an existing site</option>
@@ -247,10 +252,10 @@
         </div>
         <div class="form-field">
           <label for="message">tell_me_more</label>
-          <textarea id="message" placeholder="Tell me a bit about your business and what you're looking for…"></textarea>
+          <textarea id="message" name="message" autocomplete="off" placeholder="Tell me a bit about your business and what you're looking for…" required></textarea>
         </div>
-        <button class="btn btn-primary btn-full">Send message</button>
-      </div>
+        <button type="submit" class="btn btn-primary btn-full">Send message</button>
+      </form>
     </div>
   </div>
 </section>
