@@ -7,7 +7,7 @@
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <meta name="theme-color" content="#0d1117">
+  <meta name="theme-color" content="#f8f8f5">
 
   <meta name="description" content="Fast, secure websites for local businesses in Bromsgrove and Worcestershire. Web design, website health checks and ongoing care, with no jargon and no hidden costs.">
 
@@ -27,21 +27,44 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/style.css?v=10">
+  <link rel="stylesheet" href="/style.css?v=13">
+  <script src="/theme.js?v=2"></script>
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo"><span>~/</span>tom-harding</div>
-  <ul class="nav-links">
+  <a href="/" class="nav-logo"><span>~/</span>tom-harding</a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#who">Who I help</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button type="button" class="theme-toggle" aria-label="Switch to dark mode" aria-pressed="false">
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+    </button>
+    <button type="button" class="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
+      <span class="menu-bars" aria-hidden="true"></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU (opened by the menu button in the nav) -->
+<div id="mobile-menu" class="mobile-menu" hidden>
+  <ul>
     <li><a href="#who">Who I help</a></li>
     <li><a href="#services">Services</a></li>
     <li><a href="#work">Work</a></li>
+    <li><a href="/faq">FAQ</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-</nav>
+  <a href="#contact" class="btn btn-primary btn-full">Get a free quote</a>
+</div>
 
 
 <!-- HERO -->
@@ -57,16 +80,13 @@
       </div>
     </div>
 
-    <!-- Terminal — shows a friendly website check, not attack tooling -->
-    <div class="terminal" aria-hidden="true">
-      <div class="terminal-bar">
-        <span class="dot dot-red"></span>
-        <span class="dot dot-amber"></span>
-        <span class="dot dot-green"></span>
-        <span class="terminal-title">website-check.sh</span>
+    <!-- Website check card: animated by script.js -->
+    <div class="check-card" aria-hidden="true">
+      <div class="check-head">
+        <span class="check-title">Website health check</span>
+        <span class="check-site">your-business.co.uk</span>
       </div>
-      <div class="terminal-body">
-      </div>
+      <div class="check-body"></div>
     </div>
   </div>
 </section>
@@ -74,7 +94,7 @@
 <!-- WHO I HELP -->
 <section id="who">
   <div class="container">
-    <p class="section-label reveal">// who I help</p>
+    <p class="section-label reveal">who I help</p>
     <h2 class="reveal">Local businesses, built for engaging customers.</h2>
     <p class="section-intro reveal">If your customers can't find you online — or your Facebook page is doing all the heavy lifting — I can help with that.</p>
     <div class="sectors stagger">
@@ -109,7 +129,7 @@
 <!-- SERVICES -->
 <section id="services">
   <div class="container">
-    <p class="section-label reveal">// services</p>
+    <p class="section-label reveal">services</p>
     <h2 class="reveal">What I offer</h2>
     <p class="section-intro reveal">Straightforward pricing. No hidden costs. No confusing tech speak.</p>
     <div class="services-grid stagger">
@@ -150,44 +170,23 @@
     </div>
     <p class="custom-quote reveal">Need something bigger, like online booking, a shop or a larger site? <a href="#contact">Get in touch for a custom quote</a>.</p>
 
-  </div>
-</section>
+    <div class="process-strip reveal">
+      <p class="process-title">How it works</p>
+      <ol class="process-steps">
+        <li><span class="step-num">1</span><p><strong>Free chat</strong>Tell me what you need and get a fixed quote.</p></li>
+        <li><span class="step-num">2</span><p><strong>Design</strong>A 50% deposit starts the work and I design your site.</p></li>
+        <li><span class="step-num">3</span><p><strong>Your changes</strong>Two rounds of changes, paid for in two equal parts.</p></li>
+        <li><span class="step-num">4</span><p><strong>Launch</strong>Your site goes live, tested and secured.</p></li>
+      </ol>
+    </div>
 
-<!-- HOW IT WORKS -->
-<section id="process">
-  <div class="container">
-    <p class="section-label reveal">// how it works</p>
-    <h2 class="reveal">From first chat to launch</h2>
-    <p class="section-intro reveal">A simple process with clear costs at every step, so you always know where you stand.</p>
-    <ol class="process-steps stagger">
-      <li class="process-step">
-        <span class="step-num">01</span>
-        <h3>Free chat</h3>
-        <p>Tell me about your business and what you need. I'll give you an honest answer and a fixed quote. No obligation.</p>
-      </li>
-      <li class="process-step">
-        <span class="step-num">02</span>
-        <h3>Design</h3>
-        <p>Once you're happy with the quote, a 50% deposit gets things started and I design your site.</p>
-      </li>
-      <li class="process-step">
-        <span class="step-num">03</span>
-        <h3>Your changes</h3>
-        <p>You get two rounds of changes. The remaining balance is split into two equal payments, one after each round.</p>
-      </li>
-      <li class="process-step">
-        <span class="step-num">04</span>
-        <h3>Launch</h3>
-        <p>Your site goes live, tested and secured. Ongoing Care keeps it that way, if you'd like it.</p>
-      </li>
-    </ol>
   </div>
 </section>
 
 <!-- WORK -->
 <section id="work">
   <div class="container">
-    <p class="section-label reveal">// work</p>
+    <p class="section-label reveal">work</p>
     <h2 class="reveal">Recent work</h2>
     <p class="section-intro reveal">Websites I've built and security work for real clients.</p>
 
@@ -233,51 +232,10 @@
   </div>
 </section>
 
-<!-- SKILLS -->
-<section id="skills">
-  <div class="container">
-    <p class="section-label reveal">// skills</p>
-    <h2 class="reveal">How I build it</h2>
-    <p class="section-intro reveal">The tools behind the work — kept simple so you don't need to care about the details.</p>
-    <div class="skills-grid stagger">
-      <div class="skill-group">
-        <h3>Frontend</h3>
-        <ul class="skill-list">
-          <li>HTML5 &amp; CSS3</li>
-          <li>JavaScript</li>
-          <li>Responsive Design</li>
-          <li>Web Performance</li>
-          <li>Accessibility</li>
-        </ul>
-      </div>
-      <div class="skill-group">
-        <h3>Security</h3>
-        <ul class="skill-list">
-          <li>OWASP Top 10</li>
-          <li>SSL / TLS</li>
-          <li>Cloudflare WAF</li>
-          <li>Rate Limiting</li>
-          <li>Surface Recon</li>
-        </ul>
-      </div>
-      <div class="skill-group">
-        <h3>Infrastructure</h3>
-        <ul class="skill-list">
-          <li>Cloudflare</li>
-          <li>DNS Management</li>
-          <li>Domain Setup</li>
-          <li>Git &amp; Version Control</li>
-          <li>VS Code</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- FAQ -->
 <section id="faq">
   <div class="container">
-    <p class="section-label reveal">// faq</p>
+    <p class="section-label reveal">faq</p>
     <h2 class="reveal">Common questions</h2>
     <div class="faq-list reveal">
 
@@ -287,28 +245,8 @@
       </details>
 
       <details class="faq-item">
-        <summary>What if I need more than one page?</summary>
-        <p>Extra pages are £75 each. For example, a three-page site with Home, Services and Contact would be £450. I'll confirm the exact price in your quote before any work starts.</p>
-      </details>
-
-      <details class="faq-item">
         <summary>How does payment work?</summary>
         <p>You pay a 50% deposit before work starts. The rest is split into two equal payments: one after your first round of changes, and one after the second, before your site goes live. On a £300 site, that's £150, then £75, then £75.</p>
-      </details>
-
-      <details class="faq-item">
-        <summary>Are domain and hosting included?</summary>
-        <p>They're included in Ongoing Care, along with updates and security patches. If you'd rather manage things yourself, I'll help you set up your own domain and hosting instead.</p>
-      </details>
-
-      <details class="faq-item">
-        <summary>How long does it take?</summary>
-        <p>Most sites go live within two weeks. The biggest factor is how quickly I get your content, such as text, photos and your logo, and your feedback on each round.</p>
-      </details>
-
-      <details class="faq-item">
-        <summary>What do I need to provide?</summary>
-        <p>Your logo if you have one, some photos, and the key information about your business: what you do, where you work, prices and opening hours. Don't worry if you don't have everything ready. I can help you work out what's needed.</p>
       </details>
 
       <details class="faq-item">
@@ -316,12 +254,8 @@
         <p>Every site I build is hardened against common attacks and tested before launch, and my own site scores A+ for security headers. No honest developer can promise a site is unhackable, though. New vulnerabilities are found all the time, which is why Ongoing Care includes regular updates and patches.</p>
       </details>
 
-      <details class="faq-item">
-        <summary>I already have a website. Can you help?</summary>
-        <p>Yes. A Website Health Check is a good place to start. I'll check it for common security issues, slow load times and broken links, then give you a plain-English report of what to fix and why.</p>
-      </details>
-
     </div>
+    <p class="faq-more reveal"><a href="/faq">More questions answered →</a></p>
   </div>
 </section>
 
@@ -331,7 +265,7 @@
     <div id="about" class="about-grid about-in-contact reveal">
       <img src="/tom-harding.jpg" alt="Tom Harding" class="about-photo" width="480" height="690" loading="lazy">
       <div class="about-text">
-        <p class="section-label">// about me</p>
+        <p class="section-label">about me</p>
         <h2>Hi, I'm Tom</h2>
         <p>I'm a web developer and cybersecurity student based in Bromsgrove. I build websites for local businesses, and because security is what I study, I make sure they're protected from day one, not as an afterthought.</p>
         <p>Most web designers stop once a site goes live. I also check it the way an attacker would, looking for weak settings, exposed files and outdated software, then fix what I find and explain it in plain English.</p>
@@ -346,7 +280,7 @@
 
     <div class="contact-grid reveal">
       <div class="contact-info">
-        <p class="section-label">// get in touch</p>
+        <p class="section-label">get in touch</p>
         <h2>Let's talk</h2>
         <p>Not sure what you need? Just drop me a message — I'll give you an honest answer, no sales pitch.</p>
         <div class="contact-detail">
@@ -370,15 +304,15 @@
         <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off">
 
         <div class="form-field">
-          <label for="name">your_name</label>
+          <label for="name">Your name</label>
           <input type="text" id="name" name="name" autocomplete="name" placeholder="Jane Smith" required />
         </div>
         <div class="form-field">
-          <label for="email">email_address</label>
+          <label for="email">Email address</label>
           <input type="email" id="email" name="email" autocomplete="email" placeholder="jane@yourbusiness.co.uk" required />
         </div>
         <div class="form-field">
-          <label for="service">what_do_you_need</label>
+          <label for="service">What do you need?</label>
           <select id="service" name="service" autocomplete="off" required>
             <option value="">Choose one…</option>
             <option>A new website</option>
@@ -388,7 +322,7 @@
           </select>
         </div>
         <div class="form-field">
-          <label for="message">tell_me_more</label>
+          <label for="message">Tell me more</label>
           <textarea id="message" name="message" autocomplete="off" placeholder="Tell me a bit about your business and what you're looking for…" required></textarea>
         </div>
         <button type="submit" class="btn btn-primary btn-full">Send message</button>
@@ -407,8 +341,10 @@
     <a href="#work">Work</a>
     <a href="#about">About</a>
     <a href="#contact">Contact</a>
+    <a href="/faq">FAQ</a>
     <a href="/privacy">Privacy</a>
   </div>
 </footer>
-<script src="/script.js?v=2" defer></script>
+<script src="/script.js?v=4" defer></script>
 </body>
+</html>

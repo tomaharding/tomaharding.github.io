@@ -14,82 +14,106 @@ const observer = new IntersectionObserver((entries) => {
     el.classList.add('visible');
   });
 
-  // ── TERMINAL TYPEWRITER ────────────────────────────────────────────────────
-  const lines = [
-    { type: 'prompt', text: 'checking your-business.co.uk' },
-    { type: 'comment', text: '  # Is it mobile-friendly?' },
-    { type: 'result',  key: '  mobile', arrow: ' → ', good: true,  val: '✓ looks great on phones' },
-    { type: 'comment', text: '  # Does it load fast?' },
-    { type: 'result',  key: '  speed  ', arrow: ' → ', good: false, val: '⚠ 6.2s — needs work' },
-    { type: 'comment', text: '  # Is it secure?' },
-    { type: 'result',  key: '  ssl    ', arrow: ' → ', good: true,  val: '✓ certificate valid' },
-    { type: 'result',  key: '  contact', arrow: ' → ', good: false, val: '⚠ form exposed — no spam filter' },
+  // ── WEBSITE CHECK CARD (homepage hero) ───────────────────────────────────
+  // Rows appear one by one, like a quick health check running on a site.
+  const checks = [
+    { label: 'Mobile-friendly', result: 'Looks great on phones', good: true },
+    { label: 'Page speed',      result: '6.2s, needs work',      good: false },
+    { label: 'Security (HTTPS)', result: 'Certificate valid',    good: true },
+    { label: 'Contact form',    result: 'No spam protection',    good: false },
   ];
 
-  const body = document.querySelector('.terminal-body');
+  const checkBody = document.querySelector('#hero .check-body');
 
-  function buildLine(line) {
-    const div = document.createElement('div');
-    div.className = 't-line';
-    if (line.type === 'prompt') {
-      div.innerHTML = `<span class="t-prompt">$</span><span class="t-cmd">&nbsp;${line.text}</span>`;
-    } else if (line.type === 'comment') {
-      div.innerHTML = `<span class="t-comment">${line.text}</span>`;
-    } else if (line.type === 'result') {
-      const valClass = line.good ? 't-good' : 't-warn';
-      div.innerHTML = `<span class="t-key">${line.key}</span><span class="t-comment">${line.arrow}</span><span class="${valClass}">${line.val}</span>`;
-    }
-    return div;
+  function buildRow(check) {
+    const row = document.createElement('div');
+    row.className = 'check-row';
+    const label = document.createElement('span');
+    label.className = 'check-label';
+    label.textContent = check.label;
+    const result = document.createElement('span');
+    result.className = 'check-result ' + (check.good ? 'good' : 'warn');
+    result.textContent = (check.good ? '✓ ' : '! ') + check.result;
+    row.append(label, result);
+    return row;
   }
 
-  async function runTerminal() {
-    body.innerHTML = '';
-    // Blinking cursor line shown while typing
-    const cursorLine = document.createElement('div');
-    cursorLine.className = 't-line';
-    cursorLine.innerHTML = `<span class="t-prompt">$</span><span class="t-cmd">&nbsp;</span><span class="cursor"></span>`;
-    body.appendChild(cursorLine);
-    // Force blink to start cleanly
-    const typingCursor = cursorLine.querySelector('.cursor');
-    typingCursor.style.animation = 'none';
-    typingCursor.offsetHeight;
-    typingCursor.style.animation = '';
-
-    await delay(600);
-
-    for (const line of lines) {
-      body.removeChild(cursorLine);
-      body.appendChild(buildLine(line));
-      body.appendChild(cursorLine);
-      await delay(line.type === 'comment' ? 180 : 320);
-    }
-
-    // Final prompt with persistent cursor
-    body.removeChild(cursorLine);
-    const finalLine = document.createElement('div');
-    finalLine.className = 't-line';
-    finalLine.innerHTML = `<span class="t-prompt">$</span><span class="t-cmd">&nbsp;fixing issues&nbsp;</span><span class="cursor"></span>`;
-    body.appendChild(finalLine);
-    // Force blink animation to restart cleanly on the new element
-    const cur = finalLine.querySelector('.cursor');
-    cur.style.animation = 'none';
-    cur.offsetHeight; // reflow
-    cur.style.animation = '';
+  function setStatus(el, html) {
+    el.innerHTML = html + ' <span class="cursor"></span>';
   }
 
   function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
 
-  // Run terminal when it scrolls into view (only once)
-  const terminalEl = document.querySelector('.terminal');
-  let terminalRan = false;
-  const termObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting && !terminalRan) {
-        terminalRan = true;
-        runTerminal();
-        termObserver.unobserve(terminalEl);
+  async function runCheck() {
+    checkBody.innerHTML = '';
+    const rows = document.createElement('div');
+    const status = document.createElement('p');
+    status.className = 'check-status';
+    checkBody.append(rows, status);
+
+    setStatus(status, 'Checking your site…');
+    await delay(700);
+
+    for (const check of checks) {
+      rows.appendChild(buildRow(check));
+      await delay(450);
+    }
+
+    const issues = checks.filter(c => !c.good).length;
+    setStatus(status, `<strong>${issues} issues found.</strong> I'll fix them and explain why.`);
+  }
+
+  // Run the check when the card scrolls into view (only once)
+  if (checkBody) {
+    let checkRan = false;
+    const checkObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !checkRan) {
+          checkRan = true;
+          runCheck();
+          checkObserver.unobserve(checkBody);
+        }
+      });
+    }, { threshold: 0.4 });
+    checkObserver.observe(checkBody);
+  }
+
+
+  // ── MOBILE MENU ───────────────────────────────────────────────────────────
+  const menuBtn = document.querySelector('.menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+
+  if (menuBtn && menu) {
+    const isOpen = () => menuBtn.getAttribute('aria-expanded') === 'true';
+
+    const setOpen = (open) => {
+      menuBtn.setAttribute('aria-expanded', String(open));
+      menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      menu.hidden = !open;
+      document.documentElement.classList.toggle('menu-open', open);
+      if (open) {
+        const first = menu.querySelector('a');
+        if (first) first.focus();
+      }
+    };
+
+    menuBtn.addEventListener('click', () => setOpen(!isOpen()));
+
+    // Close after choosing a link
+    menu.addEventListener('click', (e) => {
+      if (e.target.closest('a')) setOpen(false);
+    });
+
+    // Close with Escape and return focus to the button
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isOpen()) {
+        setOpen(false);
+        menuBtn.focus();
       }
     });
-  }, { threshold: 0.4 });
-  // Only pages with the hero terminal (the homepage) run it
-  if (terminalEl) termObserver.observe(terminalEl);
+
+    // Close if the screen gets wide enough to show the normal nav
+    window.matchMedia('(min-width: 761px)').addEventListener('change', (e) => {
+      if (e.matches) setOpen(false);
+    });
+  }

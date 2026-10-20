@@ -8,24 +8,48 @@
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <meta name="theme-color" content="#0d1117">
+  <meta name="theme-color" content="#f8f8f5">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/style.css?v=13">
+  <script src="/theme.js?v=2"></script>
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
   <a href="/" class="nav-logo"><span>~/</span>tom-harding</a>
-  <ul class="nav-links">
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="/#who">Who I help</a></li>
+      <li><a href="/#services">Services</a></li>
+      <li><a href="/work/">Work</a></li>
+      <li><a href="/#about">About</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+    <button type="button" class="theme-toggle" aria-label="Switch to dark mode" aria-pressed="false">
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+    </button>
+    <button type="button" class="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
+      <span class="menu-bars" aria-hidden="true"></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU (opened by the menu button in the nav) -->
+<div id="mobile-menu" class="mobile-menu" hidden>
+  <ul>
     <li><a href="/#who">Who I help</a></li>
     <li><a href="/#services">Services</a></li>
-    <li><a href="/#work">Work</a></li>
+    <li><a href="/work/">Work</a></li>
+    <li><a href="/faq">FAQ</a></li>
+    <li><a href="/#about">About</a></li>
     <li><a href="/#contact">Contact</a></li>
   </ul>
-</nav>
+  <a href="/#contact" class="btn btn-primary btn-full">Get a free quote</a>
+</div>
 
 <!-- THANKS -->
 <section class="status-page">
@@ -34,19 +58,15 @@
     <h1>Thanks — I'll be <em>in touch</em> soon</h1>
     <p class="hero-sub">Your message has landed in my inbox. I reply to every enquiry within 24 hours, usually much sooner.</p>
 
-    <div class="terminal" aria-hidden="true">
-      <div class="terminal-bar">
-        <span class="dot dot-red"></span>
-        <span class="dot dot-amber"></span>
-        <span class="dot dot-green"></span>
-        <span class="terminal-title">send-message.sh</span>
+    <div class="check-card" aria-hidden="true">
+      <div class="check-head">
+        <span class="check-title">Message sent</span>
+        <span class="check-site">tomharding.dev</span>
       </div>
-      <div class="terminal-body">
-        <div class="t-line"><span class="t-prompt">$</span><span class="t-cmd">send-message --to tom</span></div>
-        <div class="t-line"><span class="t-good">✓</span><span class="t-cmd">message delivered</span></div>
-        <div class="t-line"><span class="t-good">✓</span><span class="t-cmd">reply within</span><span class="t-val">24 hours</span></div>
-        <div class="t-line"><span class="t-comment"># no sales pitch, just an honest answer</span></div>
-        <div class="t-line"><span class="t-prompt">$</span><span class="cursor"></span></div>
+      <div class="check-body">
+        <div class="check-row"><span class="check-label">Your message</span><span class="check-result good">✓ Delivered</span></div>
+        <div class="check-row"><span class="check-label">My reply</span><span class="check-result good">✓ Within 24 hours</span></div>
+        <p class="check-status">No sales pitch, just an honest answer. <span class="cursor"></span></p>
       </div>
     </div>
 
@@ -66,9 +86,11 @@
     <a href="/#work">Work</a>
     <a href="/#about">About</a>
     <a href="/#contact">Contact</a>
+    <a href="/faq">FAQ</a>
     <a href="/privacy">Privacy</a>
   </div>
 </footer>
 
+<script src="/script.js?v=4" defer></script>
 </body>
 </html>
