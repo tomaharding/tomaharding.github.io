@@ -1,0 +1,92 @@
+/* ================================================================
+   Shared concept-site banner with the budget switcher (‹ ›).
+   Used by every demo under /work/. No JavaScript needed: the arrows
+   and the budget pills are plain links.
+   ================================================================ */
+
+.demo-banner {
+  background: #0b2238;
+  color: #cfd8e3;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 0.8rem;
+  line-height: 1.3;
+  padding: 0.45rem 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  text-align: center;
+}
+.demo-banner a { color: #fff; }
+
+.demo-arrow {
+  flex-shrink: 0;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #fff;
+  font-size: 1.1rem;
+  text-decoration: none;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+a.demo-arrow:hover { background: rgba(255, 255, 255, 0.12); border-color: rgba(255, 255, 255, 0.5); }
+.demo-arrow.is-disabled { opacity: 0.3; }
+
+.demo-middle { display: flex; flex-direction: column; align-items: center; gap: 0.35rem; min-width: 0; }
+.demo-tiers { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: center; }
+.demo-tiers a {
+  text-decoration: none;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #cfd8e3;
+  font-weight: 600;
+}
+.demo-tiers a:hover { border-color: rgba(255, 255, 255, 0.5); color: #fff; }
+.demo-tiers a[aria-current="page"] { background: #f07c1b; border-color: #f07c1b; color: #fff; }
+.demo-note { opacity: 0.85; }
+.demo-sub { display: flex; align-items: center; justify-content: center; gap: 0.25rem 0.9rem; flex-wrap: wrap; }
+
+.demo-arrow:focus-visible,
+.demo-tiers a:focus-visible,
+.demo-included summary:focus-visible { outline: 2px solid #f07c1b; outline-offset: 2px; }
+
+/* "What's included" dropdown, inside the banner */
+.demo-banner { position: relative; z-index: 70; }
+.demo-included { font-size: 0.78rem; }
+.demo-included summary {
+  list-style: none;
+  cursor: pointer;
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  color: #fff;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: #f07c1b;
+}
+.demo-included summary::-webkit-details-marker { display: none; }
+.demo-included summary::after { content: "▾"; text-decoration: none; }
+.demo-included[open] summary::after { content: "▴"; }
+.demo-included .demo-panel {
+  position: absolute;
+  left: 50%; top: calc(100% + 6px);
+  transform: translateX(-50%);
+  width: min(340px, 92vw);
+  background: #fff;
+  color: #1c2733;
+  text-align: left;
+  font-size: 0.88rem;
+  border: 1px solid #e3e8ee;
+  border-radius: 12px;
+  padding: 1rem 1.1rem 1.1rem;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.22);
+}
+.demo-panel p { margin-bottom: 0.6rem; color: #5b6878; }
+.demo-panel ul { list-style: none; display: flex; flex-direction: column; gap: 0.35rem; margin-bottom: 0.8rem; }
+.demo-panel li::before { content: "✓ "; color: #c95f08; font-weight: 700; }
+.demo-panel a { color: #c95f08; font-weight: 600; }
+
+@media (max-width: 600px) {
+  .demo-note { display: none; }
+}

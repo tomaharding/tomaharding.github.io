@@ -1,0 +1,279 @@
+/* ================================================================
+   Fernlow Plumbing & Heating: styles for the £600, £1,000 and
+   £2,000 concept sites. Loaded after style.css (the £300 site's
+   stylesheet), which provides the colours, buttons and base layout.
+   ================================================================ */
+
+/* ── HEADER ── */
+.main-nav a[aria-current="page"] { color: var(--orange-dark); }
+.header-actions { display: flex; align-items: center; gap: 0.6rem; }
+.btn-small { padding: 0.55rem 1rem; font-size: 0.88rem; }
+.btn-outline { border: 2px solid var(--navy); color: var(--navy); background: transparent; }
+.btn-outline:hover { background: var(--navy); color: #fff; }
+.btn-light { background: #fff; color: var(--navy); }
+.btn-light:hover { background: #ffe9d6; }
+
+.menu-btn {
+  display: none;
+  width: 44px; height: 44px;
+  align-items: center; justify-content: center;
+  border: 1px solid var(--border); border-radius: 50%;
+  background: #fff; color: var(--navy); cursor: pointer;
+}
+.menu-btn span, .menu-btn span::before, .menu-btn span::after {
+  display: block; width: 18px; height: 2px; background: currentColor; border-radius: 2px;
+  transition: transform 0.2s;
+}
+.menu-btn span { position: relative; }
+.menu-btn span::before, .menu-btn span::after { content: ""; position: absolute; left: 0; }
+.menu-btn span::before { top: -6px; }
+.menu-btn span::after { top: 6px; }
+.menu-btn[aria-expanded="true"] span { background: transparent; }
+.menu-btn[aria-expanded="true"] span::before { transform: translateY(6px) rotate(45deg); }
+.menu-btn[aria-expanded="true"] span::after { transform: translateY(-6px) rotate(-45deg); }
+
+.mobile-nav { border-top: 1px solid var(--border); background: #fff; padding: 0.5rem 1.5rem 1.25rem; }
+.mobile-nav[hidden] { display: none; }
+.mobile-nav a { display: block; padding: 0.8rem 0; border-bottom: 1px solid var(--border); color: var(--text); font-weight: 500; text-decoration: none; }
+.mobile-nav a[aria-current="page"] { color: var(--orange-dark); }
+.mobile-nav .btn { margin-top: 1rem; width: 100%; text-align: center; border-bottom: none; }
+
+/* Live open/closed pill (£2,000) */
+.status-pill {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  font-size: 0.8rem; font-weight: 600;
+  padding: 0.3rem 0.7rem; border-radius: 999px;
+  background: var(--bg-alt); color: var(--muted);
+  white-space: nowrap;
+}
+.status-pill::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #9aa5b1; }
+.status-pill.is-open { background: #e7f6ec; color: #17663a; }
+.status-pill.is-open::before { background: #22a55a; box-shadow: 0 0 0 3px rgba(34, 165, 90, 0.2); }
+.status-pill.is-closed { background: #fdeee4; color: #a14a06; }
+.status-pill.is-closed::before { background: var(--orange); }
+
+/* ── PAGE HEADERS (inner pages) ── */
+.page-hero { background: var(--bg-alt); padding: 3.5rem 0 3rem; border-bottom: 1px solid var(--border); }
+.page-hero h1 { font-size: clamp(1.9rem, 4.2vw, 2.7rem); margin-bottom: 0.6rem; }
+.page-hero p { color: var(--muted); font-size: 1.08rem; max-width: 640px; }
+.breadcrumb { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.9rem; }
+.breadcrumb a { color: var(--muted); }
+
+/* ── GENERIC SECTIONS ── */
+.section { padding: 4.5rem 0; }
+.section-alt { background: var(--bg-alt); }
+.section-intro { color: var(--muted); max-width: 620px; margin: -1.5rem 0 2.25rem; }
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+.split img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius); box-shadow: var(--shadow); }
+.prose p { color: var(--muted); margin-bottom: 1rem; }
+.prose h2 { margin-bottom: 1rem; }
+.tick-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; margin: 1rem 0 1.5rem; }
+.tick-list li { display: flex; gap: 0.6rem; }
+.tick-list li::before { content: "✓"; color: var(--orange-dark); font-weight: 800; flex-shrink: 0; }
+.link-arrow { font-weight: 700; color: var(--orange-dark); text-decoration: none; }
+.link-arrow:hover { text-decoration: underline; }
+
+/* Hero variant with image (multi-page home) */
+.home-hero { padding: 4rem 0 4.5rem; }
+.home-hero .hero-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1.25rem; }
+
+/* Service cards as links */
+a.service { text-decoration: none; color: inherit; }
+.service .link-arrow { margin-top: 0.75rem; }
+
+/* Dark "why us" band, reusable */
+.band-dark { background: var(--navy); color: #fff; }
+.band-dark .eyebrow { color: var(--orange); }
+.band-dark h2, .band-dark h3 { color: #fff; }
+.band-dark .why-item p { color: #cfd8e3; }
+
+/* Call-to-action band */
+.cta-band { background: var(--orange); color: #fff; padding: 3.25rem 0; }
+.cta-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; }
+.cta-band h2 { color: #fff; margin-bottom: 0.35rem; }
+.cta-band p { color: #fff3e8; }
+.cta-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+.cta-actions .btn-call { font-size: 1rem; padding: 0.8rem 1.4rem; }
+.note-after { color: var(--muted); margin-top: 1.5rem; }
+
+/* Services page: one block per service */
+.service-detail { display: grid; grid-template-columns: 1fr 1.2fr; gap: 2.5rem; align-items: center; padding: 3rem 0; border-bottom: 1px solid var(--border); scroll-margin-top: 110px; }
+.service-detail:last-child { border-bottom: none; }
+.service-detail:nth-child(even) img { order: 2; }
+.service-detail img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius); }
+.service-detail p { color: var(--muted); }
+.price-tag { display: inline-block; font-weight: 800; color: var(--navy); background: var(--bg-alt); border: 1px solid var(--border); border-radius: 999px; padding: 0.3rem 0.9rem; margin-bottom: 1rem; }
+
+/* Steps */
+.steps { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.25rem; counter-reset: step; }
+.steps li { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; counter-increment: step; }
+.steps li::before { content: counter(step); display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 50%; background: #fdeee4; color: var(--orange-dark); font-weight: 800; margin-bottom: 0.75rem; }
+.steps p { color: var(--muted); font-size: 0.95rem; }
+
+/* Contact page */
+.contact-layout { display: grid; grid-template-columns: 1fr 1.3fr; gap: 3rem; align-items: start; }
+.info-card { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 1.6rem; margin-bottom: 1.25rem; }
+.info-card h3 { margin-bottom: 0.75rem; }
+.hours { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+.hours td { padding: 0.4rem 0; border-bottom: 1px solid var(--border); }
+.hours td:last-child { text-align: right; color: var(--muted); }
+.hours tr:last-child td { border-bottom: none; }
+.big-phone { font-size: 1.5rem; font-weight: 800; color: var(--navy); text-decoration: none; }
+
+/* ── £1,000+ : TRUST STATS ── */
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+.stat { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; text-align: center; }
+.stat strong { display: block; font-size: 1.6rem; color: var(--navy); }
+.stat span { color: var(--muted); font-size: 0.9rem; }
+
+/* ── £1,000+ : GALLERY ── */
+.filters { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.75rem; }
+.filter-btn {
+  font: inherit; font-weight: 600; font-size: 0.9rem;
+  padding: 0.5rem 1rem; border-radius: 999px;
+  border: 1px solid var(--border); background: #fff; color: var(--navy); cursor: pointer;
+}
+.filter-btn[aria-pressed="true"] { background: var(--navy); border-color: var(--navy); color: #fff; }
+.gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.25rem; }
+.gallery-item { border: none; padding: 0; background: none; cursor: zoom-in; text-align: left; font: inherit; color: inherit; }
+.gallery-item[hidden] { display: none; }
+.gallery-row { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.gallery-item img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius); transition: transform 0.2s; }
+.gallery-item:hover img { transform: scale(1.02); }
+.gallery-item span { display: block; margin-top: 0.6rem; font-weight: 700; color: var(--navy); }
+.gallery-item small { color: var(--muted); font-size: 0.85rem; }
+
+.lightbox { border: none; padding: 0; background: transparent; max-width: min(960px, 92vw); margin: auto; }
+.lightbox::backdrop { background: rgba(11, 34, 56, 0.85); }
+.lightbox img { width: 100%; max-height: 78vh; object-fit: contain; border-radius: var(--radius-sm); }
+.lightbox p { color: #fff; margin-top: 0.75rem; text-align: center; font-weight: 600; }
+.lightbox-close { position: absolute; top: -0.25rem; right: 0; transform: translateY(-100%); background: #fff; border: none; border-radius: 999px; padding: 0.45rem 0.9rem; font: inherit; font-weight: 700; cursor: pointer; }
+
+/* ── £1,000+ : BOOKING ── */
+.booking { background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); padding: 2rem; }
+.booking-progress { display: flex; gap: 0.5rem; margin-bottom: 1.75rem; list-style: none; }
+.booking-progress li { flex: 1; font-size: 0.8rem; font-weight: 600; color: var(--muted); padding-top: 0.5rem; border-top: 4px solid var(--border); }
+.booking-progress li.is-done, .booking-progress li.is-current { border-color: var(--orange); color: var(--navy); }
+.booking-step { border: none; padding: 0; margin: 0; min-width: 0; }
+.booking-step[hidden] { display: none; }
+.booking-step h2:focus { outline: none; }
+.booking-step h2 { font-size: 1.35rem; margin-bottom: 1.25rem; }
+.choice-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 0.75rem; margin-bottom: 1.5rem; }
+.choice { position: relative; }
+.choice input { position: absolute; opacity: 0; }
+.choice label {
+  display: block; height: 100%;
+  border: 2px solid var(--border); border-radius: var(--radius-sm);
+  padding: 0.9rem 1rem; cursor: pointer; font-weight: 600; color: var(--navy);
+}
+.choice label small { display: block; font-weight: 500; color: var(--muted); }
+.choice input:checked + label { border-color: var(--orange); background: #fff7f0; }
+.choice input:focus-visible + label { outline: 3px solid var(--orange); outline-offset: 2px; }
+.booking-nav { display: flex; justify-content: space-between; gap: 0.75rem; margin-top: 1.5rem; }
+.booking-error { color: #b42318; font-weight: 600; font-size: 0.9rem; min-height: 1.4rem; }
+.booking-done { text-align: center; padding: 1rem 0; }
+.booking-done .done-icon { width: 64px; height: 64px; margin: 0 auto 1rem; border-radius: 50%; background: #e7f6ec; color: #17663a; display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: 800; }
+.booking-summary { background: var(--bg-alt); border-radius: var(--radius-sm); padding: 1rem 1.25rem; margin: 1rem auto; max-width: 420px; text-align: left; }
+.booking-summary div { display: flex; justify-content: space-between; gap: 1rem; padding: 0.3rem 0; font-size: 0.95rem; }
+.booking-summary dt { color: var(--muted); }
+.booking-summary dd { font-weight: 600; text-align: right; }
+
+/* £2,000: time-slot picker */
+.day-picker { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0.5rem; margin-bottom: 1.25rem; }
+.day-btn, .slot-btn {
+  font: inherit; cursor: pointer;
+  border: 2px solid var(--border); border-radius: var(--radius-sm);
+  background: #fff; color: var(--navy);
+  padding: 0.6rem 0.3rem; text-align: center;
+}
+.day-btn strong { display: block; font-size: 1.1rem; }
+.day-btn small { color: var(--muted); font-size: 0.75rem; }
+.day-btn[aria-pressed="true"], .slot-btn[aria-pressed="true"] { border-color: var(--orange); background: #fff7f0; }
+.slot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 0.5rem; }
+.slot-btn { font-weight: 700; }
+.slot-btn:disabled { opacity: 0.35; cursor: not-allowed; text-decoration: line-through; }
+.booking-layout { display: grid; grid-template-columns: 1.6fr 1fr; gap: 1.5rem; align-items: start; }
+.booking-aside { position: sticky; top: 110px; }
+
+/* ── REVIEWS ── */
+.rating-summary { display: grid; grid-template-columns: auto 1fr; gap: 2rem; align-items: center; background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 1.75rem; margin-bottom: 2rem; }
+.rating-big { text-align: center; }
+.rating-big strong { display: block; font-size: 3rem; line-height: 1; color: var(--navy); }
+.stars { color: var(--orange); letter-spacing: 0.1em; }
+.rating-bars { display: flex; flex-direction: column; gap: 0.4rem; }
+.rating-bar { display: grid; grid-template-columns: 3.5rem 1fr 2.5rem; gap: 0.6rem; align-items: center; font-size: 0.85rem; color: var(--muted); }
+.rating-bar meter { width: 100%; height: 10px; }
+
+/* ── £2,000 : QUOTE CALCULATOR ── */
+.calc { background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); padding: 1.75rem; }
+.calc h2 { font-size: 1.3rem; margin-bottom: 1rem; }
+.calc .field { margin-bottom: 1rem; }
+.qty-row[hidden] { display: none; }
+.calc-result { margin-top: 1.25rem; background: var(--navy); color: #fff; border-radius: var(--radius-sm); padding: 1.1rem 1.25rem; }
+.calc-result small { color: #cfd8e3; display: block; }
+.calc-price { font-size: 1.9rem; font-weight: 800; line-height: 1.2; }
+.calc-note { font-size: 0.8rem; color: #cfd8e3; margin-top: 0.4rem; }
+.calc .btn { width: 100%; text-align: center; margin-top: 1rem; }
+.hero-calc-layout { display: grid; grid-template-columns: 1.1fr 1fr; gap: 3rem; align-items: center; }
+
+/* ── £2,000 : FAQ ── */
+.faq { max-width: 760px; display: flex; flex-direction: column; gap: 0.75rem; }
+.faq details { background: #fff; border: 1px solid var(--border); border-radius: var(--radius-sm); }
+.faq summary { cursor: pointer; padding: 1rem 1.25rem; font-weight: 700; color: var(--navy); list-style: none; display: flex; justify-content: space-between; gap: 1rem; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; color: var(--orange-dark); font-size: 1.3rem; line-height: 1; }
+.faq details[open] summary::after { content: "−"; }
+.faq details p { padding: 0 1.25rem 1.1rem; color: var(--muted); }
+
+/* ── £2,000 : AREA CARDS ── */
+.area-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
+.area-card { display: block; background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 1.4rem; text-decoration: none; color: inherit; transition: border-color 0.2s, transform 0.2s; }
+.area-card:hover { border-color: var(--orange); transform: translateY(-2px); }
+.area-card h3 { margin-bottom: 0.3rem; }
+.area-card p { color: var(--muted); font-size: 0.92rem; }
+
+/* ── £2,000 : STICKY CALL BAR (phones) ── */
+.call-bar { display: none; }
+
+/* ── FOOTER (multi-column) ── */
+.footer-cols { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 2rem; padding-bottom: 2rem; border-bottom: 1px solid rgba(255, 255, 255, 0.12); margin-bottom: 1.5rem; }
+.footer-cols h4 { color: #fff; font-size: 0.95rem; margin-bottom: 0.75rem; }
+.footer-cols ul { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+.footer-cols a { text-decoration: none; color: #cfd8e3; }
+.footer-cols a:hover { color: #fff; }
+.footer-bottom { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; font-size: 0.85rem; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .booking-layout, .hero-calc-layout { grid-template-columns: 1fr; }
+  .booking-aside { position: static; }
+  .footer-cols { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 760px) {
+  .menu-btn { display: inline-flex; }
+  .header-actions .btn-call, .header-actions .status-pill { display: none; }
+  .split, .service-detail, .contact-layout { grid-template-columns: 1fr; gap: 1.5rem; }
+  .service-detail:nth-child(even) img { order: 0; }
+  .section { padding: 3.25rem 0; }
+  .page-hero { padding: 2.5rem 0 2rem; }
+  .day-picker { grid-template-columns: repeat(4, 1fr); }
+  .rating-summary { grid-template-columns: 1fr; text-align: center; }
+  .footer-cols { grid-template-columns: 1fr; }
+  .booking { padding: 1.4rem; }
+  .booking-progress li { font-size: 0.7rem; }
+
+  .call-bar {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
+    padding: 0.6rem 0.75rem;
+    background: #fff; border-top: 1px solid var(--border);
+    box-shadow: 0 -6px 20px rgba(18, 48, 79, 0.1);
+  }
+  .call-bar .btn { text-align: center; padding: 0.75rem 0.5rem; }
+  .has-call-bar { padding-bottom: 72px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery-item img, .area-card { transition: none; }
+}

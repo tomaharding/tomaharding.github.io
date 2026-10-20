@@ -182,7 +182,7 @@ html.menu-open { overflow: hidden; }
 @keyframes menu-in { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
 
 /* ── SECTIONS ── */
-section { padding: clamp(4rem, 10vw, 7rem) clamp(1.5rem, 5vw, 4rem); }
+section { padding: clamp(3.5rem, 7vw, 5.5rem) clamp(1.5rem, 5vw, 4rem); }
 .container { max-width: 1000px; margin: 0 auto; }
 
 /* ── HERO ── */
@@ -347,7 +347,8 @@ h2 {
 }
 
 /* ── WHO I HELP ── */
-#who { background: var(--surface2); }
+/* Alternate bands: Who I help and Work sit on a tinted background with a divider line above and below */
+#who, #work { background: var(--surface2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
 .sectors {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
@@ -427,11 +428,7 @@ h2 {
 .custom-quote a { font-weight: 600; text-decoration: none; border-bottom: 1px solid var(--green-dim); }
 
 /* ── HOW IT WORKS (slim strip under the service cards) ── */
-.process-strip {
-  margin-top: 3rem;
-  padding-top: 2.5rem;
-  border-top: 1px solid var(--border);
-}
+.process-strip { margin-top: 2.75rem; }
 .process-title {
   font-weight: 700;
   font-size: 1.05rem;
@@ -817,7 +814,7 @@ footer {
     scroll-padding-left: clamp(1.5rem, 5vw, 4rem);
   }
   .service-card { scroll-snap-align: start; padding: 1.5rem; }
-  .process-strip { margin-top: 2rem; padding-top: 2rem; }
+  .process-strip { margin-top: 2rem; }
   .process-steps { grid-template-columns: 1fr; gap: 1rem; }
 
   /* Work: two featured cards on phones */
