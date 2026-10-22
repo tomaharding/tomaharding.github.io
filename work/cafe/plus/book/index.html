@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Book a table — Thistlewick Café (£2,000 concept site by Tom Harding)</title>
+  <meta name="description" content="Book a table online (concept site).">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="stylesheet" href="/work/cafe/style.css?v=1">
+  <link rel="stylesheet" href="/work/demo-banner.css?v=1">
+  <script src="/work/cafe/site.js?v=1" defer></script>
+</head>
+<body>
+
+  <div class="demo-banner">
+    <a class="demo-arrow" href="/work/cafe/standard/" aria-label="Previous budget: £1,000 site">‹</a>
+    <div class="demo-middle">
+      <nav class="demo-tiers" aria-label="Same site at other budgets"><a href="/work/cafe/">£500</a><a href="/work/cafe/standard/">£1,000</a><a href="/work/cafe/plus/" aria-current="page">£2,000</a><a href="/work/cafe/premium/">£3,500</a></nav>
+      <div class="demo-sub">
+        <span class="demo-note">Concept site by <a href="/">Tom Harding</a>. Thistlewick Café is a fictional business.</span>
+        <details class="demo-included">
+          <summary>What's in the £2,000 site?</summary>
+          <div class="demo-panel">
+            <p>This is how a £2,000 website for a local café could look.</p>
+            <ul>
+          <li>Everything in £1,000, plus:</li>
+          <li>Online table booking with time slots</li>
+          <li>Photo gallery with filters and full-size view</li>
+          <li>Reviews page</li>
+          <li>Seven pages in total</li>
+            </ul>
+            <a href="/#contact">Get a quote for your business →</a>
+          </div>
+        </details>
+      </div>
+    </div>
+    <a class="demo-arrow" href="/work/cafe/premium/" aria-label="Next budget: £3,500 site">›</a>
+  </div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="/work/cafe/plus/" class="logo">Thistlewick<span>.</span></a>
+      <nav class="main-nav" aria-label="Main">
+        <a href="/work/cafe/plus/menu/">Menu</a>
+        <a href="/work/cafe/plus/gallery/">Gallery</a>
+        <a href="/work/cafe/plus/reviews/">Reviews</a>
+        <a href="/work/cafe/plus/about/">About</a>
+        <a href="/work/cafe/plus/visit/">Visit us</a>
+      </nav>
+      <div class="header-actions">
+        <a href="/work/cafe/plus/book/" class="btn btn-primary btn-small hide-mobile">Book a table</a>
+        <button type="button" class="menu-btn" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu"><span></span></button>
+      </div>
+    </div>
+    <nav id="mobile-nav" class="mobile-nav" aria-label="Mobile" hidden>
+    <a href="/work/cafe/plus/">Home</a>
+    <a href="/work/cafe/plus/menu/">Menu</a>
+    <a href="/work/cafe/plus/gallery/">Gallery</a>
+    <a href="/work/cafe/plus/reviews/">Reviews</a>
+    <a href="/work/cafe/plus/about/">About</a>
+    <a href="/work/cafe/plus/visit/">Visit us</a>
+    <a href="/work/cafe/plus/book/" aria-current="page">Book a table</a>
+    <a href="/work/cafe/plus/book/" class="btn btn-primary">Book a table</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <p class="breadcrumb"><a href="/work/cafe/plus/">Home</a> / Book a table</p>
+        <h1>Book a table</h1>
+        <p>Choose a time that suits you. Walk-ins are always welcome too.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container layout-aside">
+        <form class="form-card" id="booking-form" novalidate>
+          <ol class="booking-progress" aria-label="Booking steps">
+            <li class="is-current">Guests</li>
+            <li>Date &amp; time</li>
+            <li>Your details</li>
+            <li>Done</li>
+          </ol>
+          <fieldset class="booking-step">
+            <h2>1. How many guests?</h2>
+            <div class="stepper">
+              <button type="button" data-guests="-1" aria-label="One fewer guest">−</button>
+              <output aria-live="polite">2 guests</output>
+              <button type="button" data-guests="1" aria-label="One more guest">+</button>
+            </div>
+            <input type="hidden" name="guests" value="2">
+            <p class="muted">For groups of more than 12, please call us on 01632 960456.</p>
+            <div class="booking-nav"><span></span><button type="button" class="btn btn-primary" data-next>Continue</button></div>
+          </fieldset>
+          <fieldset class="booking-step" data-needs="time" hidden>
+            <h2>2. Pick a date and time</h2>
+            <div class="field">
+              <label for="b-date">Date</label>
+              <input id="b-date" name="date" type="date" required>
+            </div>
+            <p class="field"><strong>Time</strong></p>
+            <div class="time-grid" aria-label="Available times"></div>
+            <input type="hidden" name="time">
+            <div class="booking-nav">
+              <button type="button" class="btn btn-outline" data-back>Back</button>
+              <button type="button" class="btn btn-primary" data-next>Continue</button>
+            </div>
+          </fieldset>
+          <fieldset class="booking-step" hidden>
+            <h2>3. Your details</h2>
+            <div class="form-grid">
+              <div class="field"><label for="b-name">Your name</label><input id="b-name" name="name" type="text" autocomplete="name" required></div>
+              <div class="field"><label for="b-phone">Phone number</label><input id="b-phone" name="phone" type="tel" autocomplete="tel" required></div>
+              <div class="field"><label for="b-occasion">Occasion</label><select id="b-occasion" name="occasion"><option>None</option><option>Birthday</option><option>Anniversary</option><option>Business meeting</option><option>Other</option></select></div>
+              <div class="field"><label for="b-email">Email address</label><input id="b-email" name="email" type="email" autocomplete="email" required></div>
+              <div class="field field-full"><label for="b-notes">Anything we should know? (optional)</label><textarea id="b-notes" name="notes" rows="3" placeholder="Allergies, high chair, dog joining you…"></textarea></div>
+            </div>
+            <div class="booking-nav">
+              <button type="button" class="btn btn-outline" data-back>Back</button>
+              <button type="button" class="btn btn-primary" data-next>Confirm booking</button>
+            </div>
+          </fieldset>
+          <fieldset class="booking-step booking-done" hidden>
+            <div class="done-icon" aria-hidden="true">✓</div>
+            <h2>Table booked</h2>
+            <dl class="summary">
+              <div><dt>Guests</dt><dd data-summary="guests"></dd></div>
+              <div><dt>When</dt><dd data-summary="when"></dd></div>
+              <div><dt>Name</dt><dd data-summary="name"></dd></div>
+              <div><dt>Occasion</dt><dd data-summary="occasion"></dd></div>
+            </dl>
+            <p class="muted">This is a concept site, so nothing was booked. On a real site the café would get the booking straight away and you would receive a confirmation email.</p>
+          </fieldset>
+          <p class="booking-error" aria-live="polite"></p>
+        </form>
+        <aside class="info-card aside-sticky">
+          <h3>Good to know</h3>
+          <p class="muted">We hold tables for 15 minutes. Dogs are welcome, and we have high chairs and a baby-changing room.</p>
+          <h3>Opening hours</h3>
+            <table class="hours">
+              <tr data-day="1"><td>Monday</td><td>8am – 4pm</td></tr>
+              <tr data-day="2"><td>Tuesday</td><td>8am – 4pm</td></tr>
+              <tr data-day="3"><td>Wednesday</td><td>8am – 4pm</td></tr>
+              <tr data-day="4"><td>Thursday</td><td>8am – 4pm</td></tr>
+              <tr data-day="5"><td>Friday</td><td>8am – 4pm</td></tr>
+              <tr data-day="6"><td>Saturday</td><td>8am – 5pm</td></tr>
+              <tr data-day="0"><td>Sunday</td><td>9am – 3pm</td></tr>
+            </table>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-cols">
+        <div>
+          <p class="logo">Thistlewick<span>.</span></p>
+          <p>Brunch, cakes and proper coffee in Bromsgrove town centre.</p>
+          <p><a href="tel:01632960456">01632 960456</a> · <a href="mailto:hello@example.com">hello@example.com</a></p>
+        </div>
+        <div>
+          <h4>Pages</h4>
+          <ul>
+          <li><a href="/work/cafe/plus/">Home</a></li>
+          <li><a href="/work/cafe/plus/menu/">Menu</a></li>
+          <li><a href="/work/cafe/plus/gallery/">Gallery</a></li>
+          <li><a href="/work/cafe/plus/reviews/">Reviews</a></li>
+          <li><a href="/work/cafe/plus/about/">About</a></li>
+          <li><a href="/work/cafe/plus/visit/">Visit us</a></li>
+          <li><a href="/work/cafe/plus/book/">Book a table</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Opening hours</h4>
+          <ul>
+          <li>Monday – Friday: 8am – 4pm</li>
+          <li>Saturday: 8am – 5pm</li>
+          <li>Sunday: 9am – 3pm</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Thistlewick Café (a fictional business)</span>
+        <span>Concept site designed and built by <a href="/">Tom Harding</a></span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
