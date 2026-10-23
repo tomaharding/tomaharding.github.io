@@ -817,8 +817,21 @@ footer {
   .process-strip { margin-top: 2rem; }
   .process-steps { grid-template-columns: 1fr; gap: 1rem; }
 
-  /* Work: two featured cards on phones */
-  .featured-grid .demo-soon { display: none; }
+  /* Work: swipe sideways, same as Services */
+  .featured-grid {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: 85%;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 0.75rem;
+    margin: 0 calc(-1 * clamp(1.5rem, 5vw, 4rem));
+    padding-left: clamp(1.5rem, 5vw, 4rem);
+    padding-right: clamp(1.5rem, 5vw, 4rem);
+    scroll-padding-left: clamp(1.5rem, 5vw, 4rem);
+  }
+  .featured-grid > .demo-card { scroll-snap-align: start; }
 
   /* About: smaller photo */
   .about-grid { grid-template-columns: 1fr; gap: 1.5rem; }
